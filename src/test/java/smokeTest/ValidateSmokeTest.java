@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
@@ -115,18 +116,35 @@ public class ValidateSmokeTest extends base {
 		}
 		Assert.assertEquals(Platform_present, true, "Platform Link is not Present in the Dashboard");
 
-		boolean Service_present;
+		boolean Discover_present;
 		try {
-			hm.getService_Link();
-			Service_present = true;
+			hm.getDiscover();
+			Discover_present = true;
+			Log.error("Discover link is found on home page");
 
 		} catch (NoSuchElementException e) {
-			Service_present = false;
-			Log.error("User not able to find Service_present Link on the Shop Page");
+			Discover_present = false;
+			Log.error("User not able to find Discover Link on the Shop Page");
 			Log.error(e.getMessage());
 		}
-		Assert.assertEquals(Service_present, true, "Service Directory Link is not Present in the Dashboard");
+		Assert.assertEquals(Discover_present, true, "Service Directory Link is not Present in the Dashboard");
+		
+		boolean Consulting_present;
+		try {
+			hm.getConsulting();
+			Consulting_present = true;
+			Log.error("Consulting link is found on home page");
 
+		} catch (NoSuchElementException e) {
+			Consulting_present = false;
+			Log.error("User not able to find Consulting Link on the Shop Page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(Consulting_present, true, "Consulting Link is not Present in the Dashboard");
+		
+		
+		
+		
 	}
 
 	@Test(priority = 2, dependsOnMethods = { "ValidateLogin" })
@@ -161,11 +179,11 @@ public class ValidateSmokeTest extends base {
 		try {
 			Mn.getBilling_Link();
 			Billing_present = true;
-			Log.info("Billing & invoice link is present on the Manage Page");
+			Log.info("Billing link is present on the Manage Page");
 
 		} catch (NoSuchElementException e) {
 			Billing_present = false;
-			Log.error("Billing & invoice link is not present on the Manage Page");
+			Log.error("Billing is not present on the Manage Page");
 			Log.error(e.getMessage());
 		}
 		Assert.assertEquals(Billing_present, true, "Billing & Invoice Link is not present on the Manage Page");
@@ -195,6 +213,23 @@ public class ValidateSmokeTest extends base {
 			Log.error(e.getMessage());
 		}
 		Assert.assertEquals(Subscription_present, true, "Subscription Link is not present on the Manage Page");
+	
+		boolean Usage_present;
+		try {
+			Mn.getUsage_Link();
+			Usage_present = true;
+			Log.info("Usage link is present on the Manage Page");
+
+		} catch (NoSuchElementException e) {
+			Usage_present = false;
+			Log.error("Usage link is not present on the Manage Page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(Usage_present, true, "Usage Link is not present on the Manage Page");
+
+
+	
+	
 	}
 
 	@Test(priority = 3, dependsOnMethods = { "ValidateLogin" })
@@ -222,6 +257,7 @@ public class ValidateSmokeTest extends base {
 		Log.info(
 				"After clicking on the Insight Tab from the Home page , User have successfully nevigate to the Insight Page");
 
+		/*
 		Insight In = new Insight(driver);
 
 		boolean Dashboard_present;
@@ -250,6 +286,7 @@ public class ValidateSmokeTest extends base {
 			Log.error(e.getMessage());
 		}
 		Assert.assertEquals(Report_present, true, "Report Link is not present on the Dashboard Page");
+	*/
 	}
 
 	@Test(priority = 4, dependsOnMethods = { "ValidateLogin" })
@@ -274,22 +311,7 @@ public class ValidateSmokeTest extends base {
 		Log.info("User has routed to the Notification page after clicking on the notification link");
 
 		NotificationPage Np = new NotificationPage(driver);
-/*
-		boolean Notificationbtn_present;
-		try {
-			Np.getNotification_btn();
-			Log.info("Notification Settings button is present on the Notifications page");
-			Notificationbtn_present = true;
 
-		} catch (NoSuchElementException e) {
-			Notificationbtn_present = false;
-			Log.error("Notification Settings button is not present on the Notifications page");
-			Log.error(e.getMessage());
-		}
-		Assert.assertEquals(Notificationbtn_present, true, "Notification btn is not Present in the Notification Page");
-		
-		
-		*/
 		boolean Notificationheading_present;
 		try {
 			Np.getNotification_heading();
@@ -522,7 +544,7 @@ public class ValidateSmokeTest extends base {
 
 	}
 
-	@Test(priority = 9, dependsOnMethods = { "ValidateLogin" },enabled=false)
+	@Test(priority = 901, dependsOnMethods = { "ValidateLogin" },enabled=false)
 
 	public void ValidateAccountSettings() throws InterruptedException {
 
@@ -1105,7 +1127,7 @@ public class ValidateSmokeTest extends base {
 		}
 	}
 
-	@Test(priority = 20,enabled=false)
+	@Test(priority = 201,enabled=false)
 
 	public void ValidateLoginUser() throws InterruptedException {
 		driver.get(url);
@@ -1164,7 +1186,7 @@ public class ValidateSmokeTest extends base {
 		Log.info("The title of the Shop page is Verified Successfully");
 	}
 
-	@Test(priority = 21,enabled=false)
+	@Test(priority = 202,enabled=false)
 
 	public void ValidateMyAccountList() throws InterruptedException {
 
@@ -1201,36 +1223,189 @@ public class ValidateSmokeTest extends base {
 			b++;
 		}
 
-		// }
-		// MenuList_present = true;
-		// Log.info("User has clicked on Account menu and validating the options
-		// appearing underneath it");
-		// } catch (Exception e) {
-		// MenuList_present = false;
-		// Log.error("User not able to click on the My Account link on the dashboard");
-		// Log.error(e.getMessage());
-		// }
-
-		// Assert.assertEquals(MenuList_present, true,"User not able to pick list of
-		// values from My account list");
-
-		// for(int b = 0 ; b<4;b++)
-		// {
-		// Assert.assertEquals(Menu_txt[b].equals(Menu_txtexp[b]), true,"The Options
-		// appearing in the menu is different from the expected result");
-		// }
-
 	}
 
+	@Test(priority = 22)
 
+	public void ValidateManagementLogin() throws InterruptedException 
+	{
+		driver.get(url1);
+		LoginPage lp = new LoginPage(driver);
+		Thread.sleep(5000);
+		boolean Login_present;
+		try {
+			lp.getusername().sendKeys(username1);
+			lp.getpassword().sendKeys(password1);
+			lp.getloginbtn().click();
+			Login_present = true;
+			Log.info("User has provided credentials to the login screen of the management portal");
+		} catch (Exception e) {
+			Login_present = false;
+			Log.error("User not able to provide credentials to the login page of the management portal");
+			Log.error(e.getMessage());
+		}
+		
+		Assert.assertEquals(Login_present, true, "User not able to provide credentials to the login page of the management portal");
+		
+		Thread.sleep(5000);
+		String Shop_Titleact = driver.getTitle().trim();
+		String Shop_Titlexp = "Shop - CCP";
+		Assert.assertEquals(Shop_Titleact, Shop_Titlexp, "Login Page is not appearing on management portal");
+		
+		HomePage hp = new HomePage(driver);
+		
+		boolean CustomerTab_present;
+		try {
+			hp.getCustomersTab().isDisplayed();
+			
+			Log.info("Customer tab is present on the home page");
+			CustomerTab_present = true;
 
+		} catch (NoSuchElementException e) {
 
- @AfterTest()
+			CustomerTab_present = false;
+			Log.error("Customer tab is not present on the home page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(CustomerTab_present, true, "Customer tab is not present on the home page");
+		
+		boolean CatalogTab_present;
+		try {
+			hp.getCatalogTab().isDisplayed();
+			
+			Log.info("Catalog tab is present on the home page");
+			CatalogTab_present = true;
 
- public void closebrowser()
+		} catch (NoSuchElementException e) {
 
- {
- driver.close();
- }
+			CatalogTab_present = false;
+			Log.error("Catalog tab is not present on the home page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(CatalogTab_present, true, "Catalog tab is not present on the home page");
+		
+		
+		boolean FulfillmentTab_present;
+		try {
+			hp.getFullfillmentTab().isDisplayed();
+			
+			Log.info("Fulfillment tab is present on the home page");
+			FulfillmentTab_present = true;
+
+		} catch (NoSuchElementException e) {
+
+			FulfillmentTab_present = false;
+			Log.error("Fulfillment tab is not present on the home page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(FulfillmentTab_present, true, "Fulfillment tab is not present on the home page");
+		
+		
+		boolean ReportsTab_present;
+		try {
+			hp.getReportsTab().isDisplayed();
+			
+			Log.info("Reports tab is present on the home page");
+			ReportsTab_present = true;
+
+		} catch (NoSuchElementException e) {
+
+			ReportsTab_present = false;
+			Log.error("Reports tab is not present on the home page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(ReportsTab_present, true, "Reports tab is not present on the home page");
+		
+		
+		boolean UsersTab_present;
+		try {
+			hp.getUsersTab().isDisplayed();
+			
+			Log.info("Users tab is present on the home page");
+			UsersTab_present = true;
+
+		} catch (NoSuchElementException e) {
+
+			UsersTab_present = false;
+			Log.error("Users tab is not present on the home page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(UsersTab_present, true, "Users tab is not present on the home page");
+		
+		Header hd = new Header(driver);
+		
+		boolean AccMenu_present;
+		try {
+			hd.getAccountMenu().click();
+			
+			Log.info("User clicking on Account Menu on the Home Page");
+			AccMenu_present = true;
+
+		} catch (NoSuchElementException e) {
+
+			AccMenu_present = false;
+			Log.error("User not able to click on Account Menu on the Home Page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(AccMenu_present, true, "User not able to click on Account Menu on the Home Page");
+		
+		
+		boolean Logout_present;
+		try {
+			hd.getLogout().isDisplayed();
+			
+			Log.info("Logout appear while hovering on the account menu");
+			Logout_present = true;
+
+		} catch (NoSuchElementException e) {
+
+			Logout_present = false;
+			Log.error("Logout not appear while hovering on the account menu");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(Logout_present, true, "Logout not appear while hovering on the account menu");	
+	}
+	
+	@Test(priority = 23)
+
+	public void ValidateMngmntUsersTab() throws InterruptedException 
+	{
+		HomePage hp = new HomePage(driver);
+		
+		//Actions an = new Actions(driver);
+		
+		boolean user_present;
+		try {
+			hp.getMain_Search().click();
+			Thread.sleep(1000);
+			//an.moveToElement(hp.getFullfillmentTab()).build() ;
+			hp.getUsersTab().click();
+			Thread.sleep(5000);
+			Log.info("User clicks on the User tab on the home page");
+			user_present = true;
+
+		} catch (NoSuchElementException e) {
+
+			user_present = false;
+			Log.error("User not able to click on the User tab on the home page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(user_present, true, "User not able to click on the User tab on the home page");
+		
+		String TitleHome = driver.getTitle();
+		Log.info("The title of the home page is captured");
+
+		Assert.assertEquals(TitleHome, "Users - CCP", "User is not being able to reach the users page from the home page");
+		Log.info("The title of the Users page is Verified Successfully");
+	
+	}
+	
+ //@AfterTest()
+
+ //public void closebrowser()
+
+ //{
+ //driver.close();
+ //}
 
 }
