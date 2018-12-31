@@ -24,6 +24,7 @@ import pageObjects.Insight;
 import pageObjects.LoginPage;
 import pageObjects.NotificationPage;
 import pageObjects.RegisterationPage;
+import pageObjects.Role;
 import pageObjects.Users;
 import pageObjects.Manage;
 import pageObjects.MyProfilePage;
@@ -1397,7 +1398,93 @@ public class ValidateSmokeTest extends base {
 
 		Assert.assertEquals(TitleHome, "Users - CCP", "User is not being able to reach the users page from the home page");
 		Log.info("The title of the Users page is Verified Successfully");
+	}
+
 	
+	@Test(priority = 24)
+
+	public void ValidateMngmntRolesTab() throws InterruptedException 
+	{
+		Users us = new Users(driver);
+		
+		boolean Roles_present;
+		String RolesTitle = null;
+		try {
+			us.getRoles().click();
+			Thread.sleep(7000);
+			//an.moveToElement(hp.getFullfillmentTab()).build() ;
+			
+			Log.info("User clicks on the Roles tab on the User's page");
+			Roles_present = true;
+			RolesTitle = driver.getTitle();
+
+		} catch (NoSuchElementException e) {
+			Roles_present = false;
+			Log.error("User not able to click on the Roles tab on the User's page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(Roles_present, true, "User not able to click on the Roles tab on the User's page");
+		
+		Assert.assertEquals(RolesTitle, "Roles - CCP", "User not able to reach roles page when clicking on role button on the user's page");
+	}
+	
+	@Test(priority = 25)
+
+	public void ValidateMngmntAddRolesBtn() throws InterruptedException 
+	{
+		Role ro = new Role(driver);
+		
+		boolean btn_present;
+		String Addbtn_title = null;
+		try {
+			ro.getAddRoleBtn().click();
+			Thread.sleep(7000);
+			//an.moveToElement(hp.getFullfillmentTab()).build() ;
+			
+			Log.info("User clicks on the Add new Roles Button on the Role's page");
+			btn_present = true;
+			Addbtn_title = driver.getTitle();
+
+		} catch (NoSuchElementException e) {
+			btn_present = false;
+			Log.error("User not able to click on the Add new Roles button on the Role's page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(btn_present, true, "User not able to click on the Add new Roles button on the Role's page");
+		
+		Assert.assertEquals(Addbtn_title, "Add New Role - CCP", "User not able to reach Add New roles page when clicking on Add new role button on the Roles's page");
+	
+		
+	}
+	
+	@Test(priority = 26)
+
+	public void ValidateMngmntEditRolesBtn() throws InterruptedException 
+	{
+		
+		Users us = new Users(driver);
+		
+		boolean EditBtn_present;
+		String EditPage_title = null;
+		try {
+			us.getRoles().click();
+			Log.info("User clicks on the Roles tab to nevigate back to the Role's Page");
+			Thread.sleep(5000);
+			us.getEdit().click();
+			Log.info("User clicks on the Edit button on the Role's Page");
+			Thread.sleep(5000);
+			
+			EditBtn_present = true;
+			EditPage_title = driver.getTitle();
+
+		} catch (NoSuchElementException e) {
+			EditBtn_present = false;
+			Log.error("User not able to click on the Edit button on the Role's page");
+			Log.error(e.getMessage());
+		}
+		Assert.assertEquals(EditBtn_present, true, "User not able to click on the Edit button on the Role's page");
+		
+		Assert.assertEquals(EditPage_title, "Edit Role - CCP", "User not able to reach Edit roles page when clicking on Edit button on the Roles's page");
 	}
 	
  //@AfterTest()
