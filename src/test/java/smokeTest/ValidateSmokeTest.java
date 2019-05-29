@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Iterator;
 import java.util.Set;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
