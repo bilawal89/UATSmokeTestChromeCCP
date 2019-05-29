@@ -5,7 +5,9 @@
     <classes>
       <class name="smokeTest.ValidateSmokeTest">
         <methods>
-          <include name="ValidateMngmntAddRolesBtn"/>
+          <include name="ValidateManageTab"/>
+          <include name="ValidateLogin"/>
+          <include name="ValidateInsightTab"/>
         </methods>
       </class> <!-- smokeTest.ValidateSmokeTest -->
     </classes>
